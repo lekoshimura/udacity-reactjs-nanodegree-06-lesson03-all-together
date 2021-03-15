@@ -9,19 +9,24 @@ class UserForm extends React.Component {
   };
 
   onChangeFirstNameHandler = event => {
-    this.setState({ firstname: event.target.value });
+    this.setState({ firstname: event.target.value.trim() });
   };
 
   onChangeLastNameHandler = event => {
-    this.setState({ lastname: event.target.value });
+    this.setState({ lastname: event.target.value.trim() });
   };
 
   onChangeUsernameHandler = event => {
-    this.setState({ username: event.target.value.toLowerCase() });
+    this.setState({ username: event.target.value.trim().toLowerCase() });
   };
 
   onChangeGamesPlayedHandler = event => {
-    this.setState({ gamesplayed: event.target.value });
+    this.setState({ gamesplayed: event.target.value.trim() });
+  };
+
+  areFieldsEmpty = () => {
+    const {firstname, lastname, username} = this.state;
+    return firstname.length === 0 && lastname.length === 0 && username.length === 0;
   };
 
   onSubmitHandler = (event) => {
@@ -85,7 +90,7 @@ class UserForm extends React.Component {
             onChange={this.onChangeGamesPlayedHandler} />
           </p>
         </div>
-        <input type="submit" value="Add" />
+        <button type="submit" disabled={this.areFieldsEmpty()}>Add</button>
       </form>
     )
   };
