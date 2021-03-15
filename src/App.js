@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import UserForm from './UserForm';
 import UsersList from './UsersList';
+import ToggleGamesPlayed from './ToggleGamesPlayed'
 
 /*
 This exercise will help you put together and practice all of the concepts you've
@@ -14,7 +15,8 @@ The instructions for this project are located in the `instructions.md` file.
 
 class App extends Component {
   state = {
-    userslist: []
+    userslist: [],
+    showGamesPlayed: true
   };
 
   userFormOnSubmitHandler = (user) => {
@@ -31,6 +33,10 @@ class App extends Component {
     return submissionOk;
   };
 
+  toggleGamesPlayedHandler = (show) => {
+    this.setState({showGamesPlayed: show});
+  };
+
   render() {
     return (
       <div className="App">
@@ -38,11 +44,18 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">ReactND - Coding Practice</h1>
         </header>
-        <UserForm
-          userFormOnSubmitHandler={this.userFormOnSubmitHandler} />
-        <hr style={{width: '480px'}}/>
-        <UsersList
-          userslist={this.state.userslist} />
+        <main>
+          <UserForm
+            userFormOnSubmitHandler={this.userFormOnSubmitHandler} />
+          <hr style={{width: '480px'}}/>
+          <ToggleGamesPlayed
+            showGamesPlayed={this.state.showGamesPlayed}
+            toggleGamesPlayedHandler={this.toggleGamesPlayedHandler} />
+          <hr style={{width: '480px'}}/>
+          <UsersList
+            showGamesPlayed={this.state.showGamesPlayed}
+            userslist={this.state.userslist} />
+        </main>
       </div>
     );
   }
