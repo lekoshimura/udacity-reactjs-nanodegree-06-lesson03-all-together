@@ -4,24 +4,29 @@ class UserForm extends React.Component {
   state = {
     firstname: '',
     lastname: '',
-    username: ''
+    username: '',
+    gamesplayed: 0
   };
 
-  onChangeFirstNameHandler = (event) => {
+  onChangeFirstNameHandler = event => {
     this.setState({ firstname: event.target.value });
   };
 
-  onChangeLastNameHandler = (event) => {
+  onChangeLastNameHandler = event => {
     this.setState({ lastname: event.target.value });
   };
 
-  onChangeUsernameHandler = (event) => {
+  onChangeUsernameHandler = event => {
     this.setState({ username: event.target.value.toLowerCase() });
+  };
+
+  onChangeGamesPlayedHandler = event => {
+    this.setState({ gamesplayed: event.target.value });
   };
 
   onSubmitHandler = (event) => {
     event.preventDefault();
-    const {firstname, lastname, username} = this.state;
+    const {firstname, lastname, username, gamesplayed} = this.state;
     if (firstname.length === 0) {
       alert("ERROR: Type the first name");
       return;
@@ -37,7 +42,8 @@ class UserForm extends React.Component {
     const user = {
       firstname: firstname,
       lastname: lastname,
-      username: username
+      username: username,
+      gamesplayed: gamesplayed
     };
     this.props.userFormOnSubmitHandler(user);
   };
@@ -67,6 +73,17 @@ class UserForm extends React.Component {
             placeholder="username"
             value={this.state.username}
             onChange={this.onChangeUsernameHandler} />
+        </div>
+        <div>
+          <p>games played by user:
+          <input
+            style={{width: '40px'}}
+            type="number"
+            name="gamesplayed"
+            placeholder="games played"
+            value={this.state.gamesplayed}
+            onChange={this.onChangeGamesPlayedHandler} />
+          </p>
         </div>
         <input type="submit" value="Add" />
       </form>

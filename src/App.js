@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import UserForm from './UserForm'
+import UserForm from './UserForm';
+import UsersList from './UsersList';
 
 /*
 This exercise will help you put together and practice all of the concepts you've
@@ -13,18 +14,18 @@ The instructions for this project are located in the `instructions.md` file.
 
 class App extends Component {
   state = {
-    userlist: []
+    userslist: []
   };
 
   userFormOnSubmitHandler = (user) => {
-    const { userlist } = this.state;
-    const userAlreadyAdded = userlist.filter(item => item.username === user.username).length > 0;
+    const { userslist } = this.state;
+    const userAlreadyAdded = userslist.filter(item => item.username === user.username).length > 0;
     if ( userAlreadyAdded ) {
       alert("ERROR: username already added!");
       return;
     };
-    userlist.push(user);
-    this.setState((currentState) => ({ userList: userlist }));
+    userslist.push(user);
+    this.setState((currentState) => ({ usersList: userslist }));
   };
 
   render() {
@@ -35,8 +36,10 @@ class App extends Component {
           <h1 className="App-title">ReactND - Coding Practice</h1>
         </header>
         <UserForm
-          userFormOnSubmitHandler={this.userFormOnSubmitHandler}
-          />
+          userFormOnSubmitHandler={this.userFormOnSubmitHandler} />
+        <hr style={{width: '480px'}}/>
+        <UsersList
+          userslist={this.state.userslist} />
       </div>
     );
   }
