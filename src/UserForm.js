@@ -50,7 +50,13 @@ class UserForm extends React.Component {
       username: username,
       gamesplayed: gamesplayed
     };
-    this.props.userFormOnSubmitHandler(user);
+    let submissionOk = this.props.userFormOnSubmitHandler(user);
+    if (submissionOk) {
+      this.setState({ firstname: '' });
+      this.setState({ lastname: '' });
+      this.setState({ username: '' });
+      this.setState({ gamesplayed: 0 });
+    };
   };
 
   render() {

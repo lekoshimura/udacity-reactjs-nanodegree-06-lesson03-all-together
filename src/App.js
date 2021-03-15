@@ -18,14 +18,17 @@ class App extends Component {
   };
 
   userFormOnSubmitHandler = (user) => {
+    let submissionOk = false;
     const { userslist } = this.state;
     const userAlreadyAdded = userslist.filter(item => item.username === user.username).length > 0;
     if ( userAlreadyAdded ) {
       alert("ERROR: username already added!");
-      return;
+      return submissionOk;
     };
     userslist.push(user);
     this.setState((currentState) => ({ usersList: userslist }));
+    submissionOk = true;
+    return submissionOk;
   };
 
   render() {
